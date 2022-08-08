@@ -106,7 +106,7 @@ export const Contacts = () => {
                   target="_blank"
                   href={userData.linkedinUser}
                 >
-                  Go to Telegram Now
+                  Let's connect
                 </Text>
               </ContactCardContent>
             </ContactCard>

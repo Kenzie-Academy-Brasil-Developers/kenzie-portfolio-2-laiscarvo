@@ -15,9 +15,9 @@ import { userData } from "@/utils/userData";
 interface ReposType {
   id: number;
   name: string;
-  language: string;
+  topics: string[];
   description: string;
-  git_url: string;
+  html_url: string;
   homepage: string;
 }
 
@@ -36,6 +36,8 @@ export const Project = (): JSX.Element => {
     fetchData();
   }, []);
 
+  console.log(repositories);
+
   return (
     <>
       {repositories?.map((repository) => (
@@ -53,26 +55,28 @@ export const Project = (): JSX.Element => {
             <Text type="body2" color="grey2">
               Linguagem:
             </Text>
-            {repository.language ? (
-              <ProjectStackTech>
-                <Text color="grey2" type="body2">
-                  {repository.language}
-                </Text>
-              </ProjectStackTech>
-            ) : (
-              <ProjectStackTech>
-                <Text color="grey2" type="body2">
-                  Not identified
-                </Text>
-              </ProjectStackTech>
+            {repository.topics.map((elem) =>
+              elem ? (
+                <ProjectStackTech key={elem}>
+                  <Text color="grey2" type="body2">
+                    {elem}
+                  </Text>
+                </ProjectStackTech>
+              ) : (
+                <ProjectStackTech>
+                  <Text color="grey2" type="body2">
+                    Not identified
+                  </Text>
+                </ProjectStackTech>
+              )
             )}
           </ProjectStack>
 
           <Text type="body1" color="grey2">
-            {repository.description.substring(0, 129)}
+            {repository.description?.substring(0, 129)}
           </Text>
           <ProjectLinks>
-            <ProjectLink target="_blank" href={repository.git_url}>
+            <ProjectLink target="_blank" href={repository.html_url}>
               <FaGithub /> Github Code
             </ProjectLink>
             {repository.homepage && (
